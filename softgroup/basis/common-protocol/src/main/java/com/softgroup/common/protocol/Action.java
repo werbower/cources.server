@@ -9,6 +9,10 @@ public class Action<T extends Serializable> implements Serializable {
     private ActionHeader header;
 
     private T data;
+    //
+    public static <V extends Serializable> V retData (Action<V> action){
+        return action.getData();
+    }
 
     public ActionHeader getHeader() {
         return header;
