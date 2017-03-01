@@ -1,5 +1,6 @@
 import com.softgroup.authorization.api.message.AuthorizationRequest;
 import com.softgroup.authorization.api.message.LoginRequest;
+import com.softgroup.authorization.api.message.RegisterRequest;
 import com.softgroup.authorization.api.router.AuthorizationRouter;
 import com.softgroup.common.protocol.Request;
 import com.softgroup.common.router.api.implementation.RequestRouter;
@@ -17,9 +18,11 @@ import java.util.Map;
 public class Main {
     public static void main(String[] args) {
 
-        RouterHandler authorizationRouter = new AuthorizationRouter();
+
 
         Map<String,Handler> mapRH = new HashMap<>();
+
+        RouterHandler authorizationRouter = new AuthorizationRouter();
         mapRH.put(authorizationRouter.getName(),authorizationRouter);
 
         RequestRouter requestRouter = new RequestRouter();
@@ -42,6 +45,16 @@ public class Main {
         requestLoginRequest.getHeader().setCommand("login");
         requestLoginRequest.setData(loginRequest);
         resList.add(requestLoginRequest);
+
+        RegisterRequest registerRequest = new RegisterRequest();
+        registerRequest.setDeviceId("ид регистрации");
+        registerRequest.setLocaleCode("код локали");
+        registerRequest.setPhoneNumber("телефонный номер");
+
+        Request<RegisterRequest> requestRegisterRequest = new AuthorizationRequest<>();
+        requestRegisterRequest.getHeader().setCommand("register");
+        requestRegisterRequest.setData(registerRequest);
+        resList.add(requestRegisterRequest);
 
 
         return resList;

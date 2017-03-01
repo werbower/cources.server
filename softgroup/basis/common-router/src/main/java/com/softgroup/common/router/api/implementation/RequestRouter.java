@@ -1,8 +1,6 @@
 package com.softgroup.common.router.api.implementation;
 
 import com.softgroup.common.protocol.Request;
-import com.softgroup.common.protocol.Response;
-import com.softgroup.common.router.api.interfaces.Handler;
 import com.softgroup.common.router.api.interfaces.RequestHandler;
 
 /**
@@ -18,10 +16,6 @@ public class RequestRouter extends AbstractRouter implements RequestHandler{
     public String getRouteKey(Request<?> msg) {
         return msg.getHeader().getType();
     }
-    @Override
-    public Response<?> handle(Request<?> msg) {
-        Handler handler = getMap().get(getRouteKey(msg));
-        return handler.handle(msg);
-    }
+
 
 }

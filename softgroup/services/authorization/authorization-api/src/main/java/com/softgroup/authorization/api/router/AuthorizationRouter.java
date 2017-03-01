@@ -1,6 +1,7 @@
 package com.softgroup.authorization.api.router;
 
 import com.softgroup.authorization.api.handler.LoginHandler;
+import com.softgroup.authorization.api.handler.RegisterHandler;
 import com.softgroup.common.router.api.implementation.HandlerRouter;
 import com.softgroup.common.router.api.interfaces.Handler;
 import com.softgroup.common.router.api.interfaces.RouterHandler;
@@ -23,6 +24,9 @@ public class AuthorizationRouter extends HandlerRouter implements RouterHandler 
         LoginHandler loginHandler = new LoginHandler();
         mapH.put(loginHandler.getName(),loginHandler);
         //
+        RegisterHandler registerHandler = new RegisterHandler();
+        mapH.put(registerHandler.getName(),registerHandler);
+
         setMap(mapH);
     }
 
