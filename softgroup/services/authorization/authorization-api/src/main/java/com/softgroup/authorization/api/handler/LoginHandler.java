@@ -6,10 +6,12 @@ import com.softgroup.authorization.api.message.LoginResponse;
 import com.softgroup.common.protocol.Request;
 import com.softgroup.common.protocol.Response;
 import com.softgroup.common.protocol.ResponseData;
+import org.springframework.stereotype.Component;
 
 /**
  * Created by user on 28.02.2017.
  */
+@Component
 public class LoginHandler implements AuthorizationHandler {
     public String getName() {
         return "login";

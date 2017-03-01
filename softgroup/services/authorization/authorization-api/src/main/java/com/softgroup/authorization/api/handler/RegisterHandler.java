@@ -4,10 +4,12 @@ import com.softgroup.authorization.api.message.*;
 import com.softgroup.common.protocol.Request;
 import com.softgroup.common.protocol.Response;
 import com.softgroup.common.protocol.ResponseData;
+import org.springframework.stereotype.Component;
 
 /**
  * Created by user on 28.02.2017.
  */
+@Component
 public class RegisterHandler implements AuthorizationHandler {
     public String getName() {
         return "register";
