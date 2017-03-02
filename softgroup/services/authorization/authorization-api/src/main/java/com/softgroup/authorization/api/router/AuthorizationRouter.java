@@ -35,17 +35,6 @@ public class AuthorizationRouter extends HandlerRouter implements RouterHandler 
 
 
 
- //   public AuthorizationRouter() {
-//        Map<String,Handler> mapH = new HashMap<>();
-//        //
-//        LoginHandler loginHandler = new LoginHandler();
-//        mapH.put(loginHandler.getName(),loginHandler);
-//        //
-//        RegisterHandler registerHandler = new RegisterHandler();
-//        mapH.put(registerHandler.getName(),registerHandler);
 
-//        setMap(mapH);
-
-   // }
 
 }
