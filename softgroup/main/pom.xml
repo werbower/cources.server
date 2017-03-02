@@ -15,6 +15,11 @@
             <groupId>com.softgroup</groupId>
             <artifactId>authorization-api</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.softgroup</groupId>
+            <artifactId>firstrouter</artifactId>
+            <version>0.0.1</version>
+        </dependency>
     </dependencies>
 
 

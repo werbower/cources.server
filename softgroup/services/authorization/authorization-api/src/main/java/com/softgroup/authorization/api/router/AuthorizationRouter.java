@@ -7,6 +7,7 @@ import com.softgroup.common.router.api.interfaces.RouterHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,19 +20,22 @@ public class AuthorizationRouter extends HandlerRouter implements RouterHandler 
     @Autowired
     private List<AuthorizationHandler> listHandlers;
 
-    public String getName() {
-        return "authorization";
-    }
-
-    private Map<String,Handler> populateMap(){
+    @PostConstruct
+    private void populateMap(){
         Map<String,Handler> mapHandlers = new HashMap<>();
         for (Handler handler : listHandlers) {
             mapHandlers.put(handler.getName(),handler);
         }
-        return mapHandlers;
+        setMap(mapHandlers);
     }
 
-    public AuthorizationRouter() {
+    public String getName() {
+        return "authorization";
+    }
+
+
+
+ //   public AuthorizationRouter() {
 //        Map<String,Handler> mapH = new HashMap<>();
 //        //
 //        LoginHandler loginHandler = new LoginHandler();
@@ -41,7 +45,7 @@ public class AuthorizationRouter extends HandlerRouter implements RouterHandler 
 //        mapH.put(registerHandler.getName(),registerHandler);
 
 //        setMap(mapH);
-        setMap(populateMap());
-    }
+
+   // }
 
 }

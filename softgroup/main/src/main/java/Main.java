@@ -3,9 +3,9 @@ import com.softgroup.authorization.api.message.LoginRequest;
 import com.softgroup.authorization.api.message.RegisterRequest;
 import com.softgroup.authorization.api.router.AuthorizationRouter;
 import com.softgroup.common.protocol.Request;
-import com.softgroup.common.router.api.implementation.RequestRouter;
 import com.softgroup.common.router.api.interfaces.Handler;
 import com.softgroup.common.router.api.interfaces.RouterHandler;
+import com.softgroup.firstrouter.api.RequestRouter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
