@@ -4,6 +4,7 @@ import com.softgroup.authorization.api.message.*;
 import com.softgroup.common.protocol.Request;
 import com.softgroup.common.protocol.Response;
 import com.softgroup.common.protocol.ResponseData;
+import com.softgroup.common.router.api.interfaces.AuthorizationHandler;
 import org.springframework.stereotype.Component;
 
 /**
