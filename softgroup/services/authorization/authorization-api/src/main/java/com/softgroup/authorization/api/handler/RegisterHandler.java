@@ -16,9 +16,7 @@ public class RegisterHandler implements AuthorizationHandler {
         return "register";
     }
 
-    public String getRouteKey(Request<?> msg) {
-        return null;
-    }
+
 
     public ResponseData doHandle(RegisterRequest registerRequest) {
 

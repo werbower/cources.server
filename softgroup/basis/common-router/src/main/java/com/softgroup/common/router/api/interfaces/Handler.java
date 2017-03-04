@@ -5,7 +5,7 @@ import com.softgroup.common.protocol.Response;
 
 public interface Handler {
     String getName();
-    String getRouteKey(final Request<?> msg);
+
     Response<?> handle(final Request<?> msg);
 
 }

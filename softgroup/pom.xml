@@ -14,7 +14,8 @@
 		<module>services</module>
 		<module>basis</module>
         <module>main</module>
-    </modules>
+		<module>../common-dao</module>
+	</modules>
 
 	<properties>
 		<endorsed.dir>${project.build.directory}/endorsed</endorsed.dir>

@@ -18,9 +18,7 @@ public class LoginHandler implements AuthorizationHandler {
         return "login";
     }
 
-    public String getRouteKey(Request<?> msg) {
-        return null;
-    }
+
 
     public ResponseData doHandle(LoginRequest loginRequest) {
 

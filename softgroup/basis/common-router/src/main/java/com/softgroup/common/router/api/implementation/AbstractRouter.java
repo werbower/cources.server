@@ -19,6 +19,8 @@ public abstract class AbstractRouter implements Handler {
     public Map<String, Handler> getMap() {
         return map;
     }
+    public abstract String getRouteKey(final Request<?> msg);
+
     @Override
     public Response<?> handle(Request<?> msg) {
         Handler handler = getMap().get(getRouteKey(msg));
