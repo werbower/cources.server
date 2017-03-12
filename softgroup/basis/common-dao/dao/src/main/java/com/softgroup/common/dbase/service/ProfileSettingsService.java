@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 /**
  * Created by user on 12.03.2017.
  */
-@Service("ProfileService")
+@Service
 public class ProfileSettingsService implements ProfileSettingsDao{
     @Autowired
     ProfileSettingsRepository profileSettingsRepository;
