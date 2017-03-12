@@ -1,3 +1,5 @@
+package com.softgroup.main;
+
 import com.softgroup.authorization.api.AuthorizationConfig;
 import com.softgroup.common.router.api.RouterConfig;
 import com.softgroup.firstrouter.api.FirstRouterConfig;

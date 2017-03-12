@@ -1,41 +1,31 @@
+package com.softgroup.main;
+
 import com.softgroup.authorization.api.message.AuthorizationRequest;
 import com.softgroup.authorization.api.message.LoginRequest;
 import com.softgroup.authorization.api.message.RegisterRequest;
-import com.softgroup.authorization.api.router.AuthorizationRouter;
 import com.softgroup.common.protocol.Request;
-import com.softgroup.common.router.api.interfaces.Handler;
-import com.softgroup.common.router.api.interfaces.RouterHandler;
 import com.softgroup.firstrouter.api.RequestRouter;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
- * Created by user on 27.02.2017.
+ * Created by user on 01.03.2017.
  */
-public class Main {
+public class MainSpring {
     public static void main(String[] args) {
+        ApplicationContext context = new AnnotationConfigApplicationContext(MainConfig.class);
 
 
-
-        Map<String,Handler> mapRH = new HashMap<>();
-
-        RouterHandler authorizationRouter = new AuthorizationRouter();
-        mapRH.put(authorizationRouter.getName(),authorizationRouter);
-
-        RequestRouter requestRouter = new RequestRouter();
-        requestRouter.setMap(mapRH);
-
+        RequestRouter requestRouter = context.getBean(RequestRouter.class);
         List<Request<?>> requestList = createRequestList();
         for (Request<?> request: requestList) {
             requestRouter.handle(request);
         }
 
-
     }
-
     public static List<Request<?>> createRequestList(){
         List<Request<?>> resList = new ArrayList<>();
 
@@ -62,5 +52,4 @@ public class Main {
 
 
     }
-
 }

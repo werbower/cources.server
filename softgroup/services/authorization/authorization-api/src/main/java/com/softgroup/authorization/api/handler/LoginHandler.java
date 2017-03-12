@@ -38,7 +38,7 @@ public class LoginHandler implements AuthorizationHandler {
 
         if (loginData instanceof LoginRequest){
             responseData = doHandle((LoginRequest)loginData);
-            AuthorizationResponse<LoginResponse> authorizationResponse = new AuthorizationResponse<LoginResponse>();
+            AuthorizationResponse<LoginResponse> authorizationResponse = new AuthorizationResponse<>();
             authorizationResponse.setData((LoginResponse) responseData);
             return authorizationResponse;
         }else {

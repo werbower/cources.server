@@ -14,7 +14,6 @@
 		<module>services</module>
 		<module>basis</module>
         <module>main</module>
-		<module>../common-dao</module>
 	</modules>
 
 	<properties>
