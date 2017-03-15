@@ -2,10 +2,10 @@ package com.softgroup.common.dbase.test;
 
 
 import com.softgroup.common.dbase.config.CommonDaoAppCfg;
-import com.softgroup.common.dbase.dao.ProfileDao;
-import com.softgroup.common.dbase.dao.ProfileSettingsDao;
 import com.softgroup.common.dbase.model.ProfileEntity;
 import com.softgroup.common.dbase.model.ProfileSettingsEntity;
+import com.softgroup.common.dbase.service.ProfileService;
+import com.softgroup.common.dbase.service.ProfileSettingsService;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,9 +23,9 @@ import java.util.List;
 public class StartupTest {
 
     @Autowired
-    ProfileDao profileService;
+    ProfileService profileService;
     @Autowired
-    ProfileSettingsDao profileSettingsService;
+    ProfileSettingsService profileSettingsService;
 
     @Test
     public void test(){
