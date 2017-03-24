@@ -1,5 +1,6 @@
 package com.softgroup.restserver.config.security;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.GenericFilterBean;
@@ -16,11 +17,14 @@ import java.io.IOException;
  */
 @Component
 public class MyFilter extends GenericFilterBean {
+    @Autowired
+    RegisterUser registerUser;
+
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         if (httpServletRequest.getHeader("command").equals("register")){
-            SecurityContextHolder.getContext().setAuthentication(new RegisterUser());
+            SecurityContextHolder.getContext().setAuthentication(registerUser);
         }
         chain.doFilter(request,response);
     }
