@@ -3,6 +3,7 @@ package com.softgroup.restserver.config.security;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -11,6 +12,7 @@ import java.util.List;
 /**
  * Created by user on 22.03.2017.
  */
+@Component
 public class RegisterUser implements Authentication {
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -18,6 +20,8 @@ public class RegisterUser implements Authentication {
         list.add(new SimpleGrantedAuthority("ROLE_REGISTER"));
         return list;
     }
+
+
 
     @Override
     public Object getCredentials() {

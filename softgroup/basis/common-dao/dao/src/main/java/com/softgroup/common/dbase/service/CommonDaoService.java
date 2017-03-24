@@ -10,7 +10,7 @@ import java.io.Serializable;
  */
 public class CommonDaoService<W extends PagingAndSortingRepository<T,S>, T,S extends Serializable> {
     @Autowired
-    W rep;
+    protected W rep;
     //
 
     public T save(T s) {

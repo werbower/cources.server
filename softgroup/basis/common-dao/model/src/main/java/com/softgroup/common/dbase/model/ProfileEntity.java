@@ -35,9 +35,11 @@ public class ProfileEntity implements Serializable{
 	@Column(name = "avatar_uri")
     private String avatarUri;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "profile")
+    //@OneToMany(fetch = FetchType.EAGER, mappedBy = "profile")
+    @Transient
 	private List<ProfileSettingsEntity> settingsEntities;
 
+    //<editor-fold desc="getters&setters">
     public String getId() {
         return id;
     }
@@ -93,6 +95,7 @@ public class ProfileEntity implements Serializable{
     public void setAvatarUri(String avatarUri) {
         this.avatarUri = avatarUri;
     }
+    //</editor-fold>
 
     public List<ProfileSettingsEntity> getSettingsEntities() {
         return settingsEntities;

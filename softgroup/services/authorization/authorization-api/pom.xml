@@ -11,6 +11,20 @@
 
 	<artifactId>authorization-api</artifactId>
 
+    <dependencies>
+        <dependency>
+            <groupId>com.softgroup</groupId>
+            <artifactId>dao</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.softgroup</groupId>
+            <artifactId>common-router</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.softgroup</groupId>
+            <artifactId>jwtService</artifactId>
+        </dependency>
+    </dependencies>
 
 
 </project>

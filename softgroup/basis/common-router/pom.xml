@@ -17,12 +17,10 @@
 	</properties>
 
 	<dependencies>
-
 		<dependency>
 			<groupId>com.softgroup</groupId>
 			<artifactId>common-datamapper</artifactId>
 		</dependency>
-
 		<dependency>
 			<groupId>com.softgroup</groupId>
 			<artifactId>common-protocol</artifactId>

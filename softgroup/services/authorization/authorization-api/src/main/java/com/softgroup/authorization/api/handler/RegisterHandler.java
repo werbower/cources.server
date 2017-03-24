@@ -3,9 +3,13 @@ package com.softgroup.authorization.api.handler;
 import com.softgroup.authorization.api.message.AuthorizationResponse;
 import com.softgroup.authorization.api.message.RegisterRequest;
 import com.softgroup.authorization.api.message.RegisterResponse;
+import com.softgroup.common.dbase.model.ProfileEntity;
+import com.softgroup.common.dbase.service.ProfileService;
 import com.softgroup.common.protocol.Request;
 import com.softgroup.common.protocol.Response;
 import com.softgroup.common.router.api.interfaces.AuthorizationHandler;
+import com.softgroup.token.JwtService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.UUID;
@@ -15,6 +19,11 @@ import java.util.UUID;
  */
 @Component
 public class RegisterHandler implements AuthorizationHandler {
+    @Autowired
+    ProfileService profileService;
+    @Autowired
+    JwtService jwtService;
+
     public String getName() {
         return "register";
     }
@@ -23,10 +32,16 @@ public class RegisterHandler implements AuthorizationHandler {
 
     public RegisterResponse doHandle(RegisterRequest registerRequest) {
 
+        String phoneNumber = registerRequest.getPhoneNumber();
+        System.out.println("получен номер телефона "+phoneNumber);
+        ProfileEntity registeredProfile = profileService.obtainProfile(phoneNumber);
+        String xToken = jwtService.tokenOut(registeredProfile);
+
+
+
         RegisterResponse response= new RegisterResponse();
-        response.setAuthCode("код аутентификации");
-        String locUUID = UUID.randomUUID().toString();
-        response.setRegistrationRequestUuid(locUUID);
+        response.setAuthCode(xToken);
+        response.setRegistrationRequestUuid(UUID.randomUUID().toString());
         response.setRegistrationTimeoutSec("20");
         //
         System.out.println(" Обрабатываю RegisterRequest");

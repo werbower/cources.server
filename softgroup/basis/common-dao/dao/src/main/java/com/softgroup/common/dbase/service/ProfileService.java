@@ -4,7 +4,9 @@ import com.softgroup.common.dbase.dao.ProfileRepository;
 import com.softgroup.common.dbase.model.ProfileEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
+import java.util.UUID;
 
 /**
  * Created by user on 12.03.2017.
@@ -19,6 +21,20 @@ public class ProfileService extends CommonDaoService<ProfileRepository,ProfileEn
 
     public List<ProfileEntity> findByNameQuery(String s) {
         return rep.findByNameQuery(s);
+    }
+
+    public ProfileEntity obtainProfile(String phoneNumber){
+        ProfileEntity foundEntity = rep.findByPhoneNumberQuery(phoneNumber);
+
+        if (foundEntity == null){
+            System.out.println(" в базе нет элемента с телефоном "+phoneNumber);
+            ProfileEntity newEntity = new ProfileEntity();
+            newEntity.setId(UUID.randomUUID().toString());
+            newEntity.setPhoneNumber(phoneNumber);
+            newEntity.setCreateDateTime(new Date().getTime());
+            foundEntity = save(newEntity);
+        }
+        return foundEntity;
     }
 
 

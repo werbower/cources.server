@@ -28,35 +28,57 @@
 
 	<dependencyManagement>
 		<dependencies>
-			<!-- COMMON -->
+			<dependency>
+				<groupId>com.softgroup</groupId>
+				<artifactId>dao</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.softgroup</groupId>
+				<artifactId>model</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.softgroup</groupId>
+				<artifactId>common-datamapper</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.softgroup</groupId>
+				<artifactId>common-exceptions</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.softgroup</groupId>
+				<artifactId>common-protocol</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.softgroup</groupId>
+				<artifactId>common-router</artifactId>
+				<version>${project.version}</version>
+			</dependency>
 
 			<dependency>
 				<groupId>com.softgroup</groupId>
 				<artifactId>authorization-api</artifactId>
 				<version>${project.version}</version>
 			</dependency>
-
 			<dependency>
 				<groupId>com.softgroup</groupId>
-				<artifactId>common-datamapper</artifactId>
+				<artifactId>firstrouter</artifactId>
 				<version>${project.version}</version>
 			</dependency>
-
 			<dependency>
 				<groupId>com.softgroup</groupId>
-				<artifactId>common-exceptions</artifactId>
-				<version>${project.version}</version>
-			</dependency>
-
-			<dependency>
-				<groupId>com.softgroup</groupId>
-				<artifactId>common-protocol</artifactId>
+				<artifactId>jwtService</artifactId>
 				<version>${project.version}</version>
 			</dependency>
 
 
 
-			<!-- TEST -->
+
+
 			<dependency>
 				<groupId>javax.servlet</groupId>
 				<artifactId>javax.servlet-api</artifactId>
@@ -119,7 +141,6 @@
 	</dependencyManagement>
 
 	<dependencies>
-		<!-- COMMON -->
 		<!-- SPRING -->
 		<dependency>
 			<groupId>org.springframework</groupId>

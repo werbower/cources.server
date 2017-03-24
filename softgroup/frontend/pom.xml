@@ -20,23 +20,37 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>org.springframework</groupId>
-			<artifactId>spring-webmvc</artifactId>
-			<version>${spring.core.version}</version>
+			<groupId>com.softgroup</groupId>
+			<artifactId>dao</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.softgroup</groupId>
+			<artifactId>common-router</artifactId>
 		</dependency>
 		<dependency>
 			<groupId>com.softgroup</groupId>
 			<artifactId>authorization-api</artifactId>
 		</dependency>
 		<dependency>
+			<groupId>com.softgroup</groupId>
+			<artifactId>firstrouter</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>com.softgroup</groupId>
+			<artifactId>jwtService</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+			<version>${spring.core.version}</version>
+		</dependency>
+
+		<dependency>
 			<groupId>javax.servlet</groupId>
 			<artifactId>javax.servlet-api</artifactId>
 		</dependency>
-        <dependency>
-            <groupId>com.softgroup</groupId>
-            <artifactId>firstrouter</artifactId>
-            <version>0.0.1</version>
-        </dependency>
+
 
 		<!--for security-->
 		<dependency>
@@ -53,13 +67,6 @@
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-config</artifactId>
-		</dependency>
-
-		<!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt -->
-		<dependency>
-			<groupId>io.jsonwebtoken</groupId>
-			<artifactId>jjwt</artifactId>
-			<version>0.7.0</version>
 		</dependency>
 
 	</dependencies>
