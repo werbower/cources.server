@@ -3,6 +3,8 @@ package com.softgroup.common.dbase.service;
 import com.softgroup.common.dbase.dao.ProfileRepository;
 import com.softgroup.common.dbase.model.ProfileEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
@@ -23,6 +25,7 @@ public class ProfileService extends CommonDaoService<ProfileRepository,ProfileEn
         return rep.findByNameQuery(s);
     }
 
+    @Transactional(isolation = Isolation.SERIALIZABLE)
     public ProfileEntity obtainProfile(String phoneNumber){
         ProfileEntity foundEntity = rep.findByPhoneNumberQuery(phoneNumber);
 
@@ -31,7 +34,7 @@ public class ProfileService extends CommonDaoService<ProfileRepository,ProfileEn
             ProfileEntity newEntity = new ProfileEntity();
             newEntity.setId(UUID.randomUUID().toString());
             newEntity.setPhoneNumber(phoneNumber);
-            newEntity.setCreateDateTime(new Date().getTime());
+            newEntity.setCreateDateTime(new Date(System.currentTimeMillis()).getTime());
             foundEntity = save(newEntity);
         }
         return foundEntity;
