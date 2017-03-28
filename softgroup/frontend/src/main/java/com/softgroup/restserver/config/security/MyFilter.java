@@ -20,12 +20,17 @@ public class MyFilter extends GenericFilterBean {
     @Autowired
     RegisterUser registerUser;
 
+
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
         if (httpServletRequest.getHeader("command").equals("register")){
-            SecurityContextHolder.getContext().setAuthentication(registerUser);
+            SecurityContextHolder.getContext().setAuthentication(registerUser);}
+        else if (httpServletRequest.getHeader("xToken")!=null){
+
+
         }
+
         chain.doFilter(request,response);
     }
 }

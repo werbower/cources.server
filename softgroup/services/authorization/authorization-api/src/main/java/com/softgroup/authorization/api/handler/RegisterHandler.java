@@ -8,7 +8,7 @@ import com.softgroup.common.dbase.service.ProfileService;
 import com.softgroup.common.protocol.Request;
 import com.softgroup.common.protocol.Response;
 import com.softgroup.common.router.api.interfaces.AuthorizationHandler;
-import com.softgroup.token.JwtService;
+import com.softgroup.token.JwtApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -22,7 +22,7 @@ public class RegisterHandler implements AuthorizationHandler {
     @Autowired
     ProfileService profileService;
     @Autowired
-    JwtService jwtService;
+    JwtApi jwtService;
 
     public String getName() {
         return "register";
@@ -34,8 +34,8 @@ public class RegisterHandler implements AuthorizationHandler {
 
         String phoneNumber = registerRequest.getPhoneNumber();
         System.out.println("получен номер телефона "+phoneNumber);
-        ProfileEntity registeredProfile = profileService.obtainProfile(phoneNumber);
-        String xToken = jwtService.tokenOut(registeredProfile);
+        ProfileEntity registeredProfile = profileService.findOrCreateProfile(phoneNumber);
+        String xToken = jwtService.tokenFromProfile(registeredProfile);
 
 
 

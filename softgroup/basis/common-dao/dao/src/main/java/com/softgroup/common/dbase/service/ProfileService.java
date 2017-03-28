@@ -29,7 +29,7 @@ public class ProfileService extends CommonDaoService<ProfileRepository,ProfileEn
     @Transactional(
             isolation = Isolation.SERIALIZABLE
     )
-    public ProfileEntity obtainProfile(String phoneNumber){
+    public ProfileEntity findOrCreateProfile(String phoneNumber){
         ProfileEntity foundEntity = rep.findByPhoneNumberQuery(phoneNumber);
 
         if (foundEntity == null){

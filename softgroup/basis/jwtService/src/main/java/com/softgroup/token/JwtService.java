@@ -11,10 +11,13 @@ import java.util.Date;
  * Created by user on 21.03.2017.
  */
 @Component
-public class JwtService {
+public class JwtService implements JwtApi{
     private byte[] secretKey = new byte[]{1,45,15,12,85};
 
-    public String tokenOut(ProfileEntity profileEntity){
+    public String tokenFromProfile(ProfileEntity profileEntity){
+        if (profileEntity==null)
+            return null;
+        //
         Date expDate = new Date(System.currentTimeMillis()+1*60*60*1000);
 
         Claims claims = Jwts.claims();
@@ -30,7 +33,10 @@ public class JwtService {
         return jwtBuilder.compact();
     }
 
-    public ProfileEntity fromToken(String token){
+    public ProfileEntity profileFromToken(String token){
+        if (token==null)
+            return null;
+        //
         Claims claims;
         ProfileEntity resEntity = null;
         JwtParser jwtParser = Jwts.parser().setSigningKey(secretKey);

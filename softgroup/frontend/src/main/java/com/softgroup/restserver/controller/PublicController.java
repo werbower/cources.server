@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpSession;
+
 /**
  * Created by user on 20.03.2017.
  */
@@ -35,8 +37,9 @@ public class PublicController {
     )
     public ResponseEntity<RegisterResponse> registration(
             @RequestBody RegisterRequest registerRequest
+            ,HttpSession httpSession
             ){
-
+        System.out.println("id session: "+httpSession.getId());
 
         Request<RegisterRequest> requestRegisterRequest = new AuthorizationRequest<>();
         requestRegisterRequest.getHeader().setCommand("register");
@@ -47,6 +50,7 @@ public class PublicController {
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("command","register");
+        headers.add("xToken",registerResponse.getAuthCode());
 
         ResponseEntity<RegisterResponse> responseEntity  = new ResponseEntity<>(
                 registerResponse
