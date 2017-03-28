@@ -1,11 +1,9 @@
 package com.softgroup.common.dbase.config;
 
-import org.apache.derby.jdbc.ClientDriver;
 import org.hibernate.dialect.DerbyTenSevenDialect;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.FilterType;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.*;
+import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 import org.springframework.orm.jpa.JpaTransactionManager;
@@ -18,6 +16,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.persistence.EntityManagerFactory;
 import javax.sql.DataSource;
+import java.sql.Driver;
 
 
 /**
@@ -26,8 +25,13 @@ import javax.sql.DataSource;
  */
 
 @Configuration
+@PropertySource({ "classpath:dao.properties" })
 @EnableTransactionManagement(proxyTargetClass = true)
-@EnableJpaRepositories("com.softgroup.common.dbase.dao")
+@EnableJpaRepositories(
+        basePackages = "com.softgroup.common.dbase.dao",
+        entityManagerFactoryRef = "entityManagerFactory",
+        transactionManagerRef = "transactionManager"
+)
 @ComponentScan(basePackages = {"com.softgroup.common.dbase.service"},
         excludeFilters = @ComponentScan.Filter(type = FilterType.ANNOTATION, value = {Configuration.class})
 )
@@ -36,10 +40,13 @@ public class CommonDaoAppCfg {
     private static final String[] ENTITY_PACKAGES = {
             "com.softgroup.common.dbase.model"
     };
+    @Autowired
+    Environment env;
 
 
     @Bean
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory() {
+    @Primary
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory() throws ClassNotFoundException{
         LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
         entityManagerFactoryBean.setDataSource(dataSource());
         entityManagerFactoryBean.setJpaVendorAdapter(jpaVendorAdapter());
@@ -48,17 +55,20 @@ public class CommonDaoAppCfg {
     }
 
     @Bean
-    public DataSource dataSource(){
+    @Primary
+    public DataSource dataSource() throws ClassNotFoundException{
         SimpleDriverDataSource dataSource = new SimpleDriverDataSource();
-        dataSource.setDriverClass(ClientDriver.class);
-        dataSource.setUrl("jdbc:derby://localhost:1527/messenger;create=true");
-        dataSource.setUsername("app");
-        dataSource.setPassword("app");
+//        dataSource.setDriverClass(ClientDriver.class);
+        dataSource.setDriverClass(((Class<Driver>) Class.forName(env.getProperty("db0.driver"))));
+        dataSource.setUrl(env.getProperty("db0.url"));
+        dataSource.setUsername(env.getProperty("db0.username"));
+        dataSource.setPassword(env.getProperty("db0.password"));
 
         return dataSource;
     }
 
     @Bean
+    @Primary
     public PlatformTransactionManager transactionManager(EntityManagerFactory emf){
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(emf);

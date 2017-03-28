@@ -14,7 +14,6 @@
 	<modules>
 		<module>authorization</module>
 		<module>firstrouter</module>
-        <module>jwtService</module>
     </modules>
 
 	<properties>
