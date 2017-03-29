@@ -1,5 +1,6 @@
 package com.softgroup.common.dbase.config;
 
+import liquibase.integration.spring.SpringLiquibase;
 import org.hibernate.dialect.DerbyTenSevenDialect;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.*;
@@ -82,6 +83,14 @@ public class CommonDaoAppCfg {
         jpaVendorAdapter.setGenerateDdl(true);
         jpaVendorAdapter.setDatabasePlatform(DerbyTenSevenDialect.class.getCanonicalName());
         return jpaVendorAdapter;
+    }
+
+    @Bean
+    public SpringLiquibase liquibase() throws ClassNotFoundException{
+        SpringLiquibase liquibase = new SpringLiquibase();
+        liquibase.setChangeLog("classpath:liquiBase.xml");
+        liquibase.setDataSource(dataSource());
+        return liquibase;
     }
 
 

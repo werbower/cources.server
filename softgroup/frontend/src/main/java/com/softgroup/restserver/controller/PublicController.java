@@ -7,6 +7,7 @@ import com.softgroup.common.protocol.Request;
 import com.softgroup.common.protocol.Response;
 import com.softgroup.firstrouter.api.RequestRouter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -14,8 +15,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
-import javax.servlet.http.HttpSession;
 
 /**
  * Created by user on 20.03.2017.
@@ -29,6 +28,8 @@ public class PublicController {
 
     @Autowired
     RequestRouter requestRouter;
+    @Autowired
+    Environment environment;
 
     @RequestMapping(
 
@@ -37,9 +38,7 @@ public class PublicController {
     )
     public ResponseEntity<RegisterResponse> registration(
             @RequestBody RegisterRequest registerRequest
-            ,HttpSession httpSession
             ){
-        System.out.println("id session: "+httpSession.getId());
 
         Request<RegisterRequest> requestRegisterRequest = new AuthorizationRequest<>();
         requestRegisterRequest.getHeader().setCommand("register");

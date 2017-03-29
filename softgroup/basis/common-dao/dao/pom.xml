@@ -24,6 +24,11 @@
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-core</artifactId>
+            <version>3.4.1</version>
+        </dependency>
 
 
         <dependency>
@@ -46,6 +51,9 @@
                     <resource>
                         <directory>src/main/resources/develop</directory>
                     </resource>
+                    <resource>
+                        <directory>src/main/resources/develop/liquibase</directory>
+                    </resource>
                 </resources>
             </build>
         </profile>
@@ -61,6 +69,9 @@
                 <resources>
                     <resource>
                         <directory>src/main/resources/release</directory>
+                    </resource>
+                    <resource>
+                        <directory>src/main/resources/release/liquibase</directory>
                     </resource>
                 </resources>
             </build>
