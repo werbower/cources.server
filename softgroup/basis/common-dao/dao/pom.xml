@@ -54,6 +54,9 @@
                     <resource>
                         <directory>src/main/resources/develop/liquibase</directory>
                     </resource>
+                    <resource>
+                        <directory>src/main/resources/develop/liquibase_embedded</directory>
+                    </resource>
                 </resources>
             </build>
         </profile>
@@ -72,6 +75,9 @@
                     </resource>
                     <resource>
                         <directory>src/main/resources/release/liquibase</directory>
+                    </resource>
+                    <resource>
+                        <directory>src/main/resources/release/liquibase_embedded</directory>
                     </resource>
                 </resources>
             </build>

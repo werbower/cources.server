@@ -1,7 +1,5 @@
 package com.softgroup.restserver.controller;
 
-import com.softgroup.authorization.api.message.AuthorizationRequest;
-import com.softgroup.authorization.api.message.RegisterRequest;
 import com.softgroup.authorization.api.message.RegisterResponse;
 import com.softgroup.common.protocol.Request;
 import com.softgroup.common.protocol.Response;
@@ -36,22 +34,19 @@ public class PublicController {
             consumes = MediaType.APPLICATION_JSON_VALUE
             ,produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<RegisterResponse> registration(
-            @RequestBody RegisterRequest registerRequest
+    public ResponseEntity<?> registration(
+            @RequestBody Request<?> request
             ){
+        String strCommand = request.getHeader().getCommand();
 
-        Request<RegisterRequest> requestRegisterRequest = new AuthorizationRequest<>();
-        requestRegisterRequest.getHeader().setCommand("register");
-        requestRegisterRequest.setData(registerRequest);
-
-        Response<?> response = requestRouter.handle(requestRegisterRequest);
+        Response<?> response = requestRouter.handle(request);
         RegisterResponse registerResponse = (RegisterResponse) response.retData(response);
 
         HttpHeaders headers = new HttpHeaders();
         headers.add("command","register");
         headers.add("xToken",registerResponse.getAuthCode());
 
-        ResponseEntity<RegisterResponse> responseEntity  = new ResponseEntity<>(
+        ResponseEntity<?> responseEntity  = new ResponseEntity<>(
                 registerResponse
                 ,headers
                 , HttpStatus.OK

@@ -6,9 +6,9 @@ import com.fasterxml.jackson.annotation.PropertyAccessor;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.PropertyNamingStrategy;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.softgroup.common.exceptions.MapperException;
+import org.springframework.stereotype.Component;
 
 import java.io.InputStream;
 import java.util.Map;
@@ -16,6 +16,7 @@ import java.util.Map;
 /**
  * @author Arthas
  */
+@Component
 public class JacksonDataMapper implements DataMapper {
 	private static final String CPJ = "Can't parse json";
 
@@ -26,7 +27,7 @@ public class JacksonDataMapper implements DataMapper {
 		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 		mapper.configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false);
 		mapper.setVisibility(PropertyAccessor.FIELD, JsonAutoDetect.Visibility.ANY);
-		mapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
+//		mapper.setPropertyNamingStrategy(PropertyNamingStrategy.SNAKE_CASE);
 		mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
 	}
 

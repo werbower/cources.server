@@ -3,6 +3,7 @@ package com.softgroup.authorization.api.handler;
 import com.softgroup.authorization.api.message.AuthorizationResponse;
 import com.softgroup.authorization.api.message.RegisterRequest;
 import com.softgroup.authorization.api.message.RegisterResponse;
+import com.softgroup.common.datamapper.DataMapper;
 import com.softgroup.common.dbase.model.ProfileEntity;
 import com.softgroup.common.dbase.service.ProfileService;
 import com.softgroup.common.protocol.Request;
@@ -12,6 +13,7 @@ import com.softgroup.token.JwtApi;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import java.util.Map;
 import java.util.UUID;
 
 /**
@@ -19,6 +21,8 @@ import java.util.UUID;
  */
 @Component
 public class RegisterHandler implements AuthorizationHandler {
+    @Autowired
+    DataMapper dataMapper;
     @Autowired
     ProfileService profileService;
     @Autowired
@@ -52,11 +56,10 @@ public class RegisterHandler implements AuthorizationHandler {
     }
 
     public Response<?> handle(Request<?> msg) {
-        RegisterResponse responseData;
-        Object registerData = msg.retData(msg);
+        RegisterRequest registerData = dataMapper.convert((Map<String,Object>)msg.getData(), RegisterRequest.class);
 
         if (registerData instanceof RegisterRequest){
-            responseData = doHandle((RegisterRequest)registerData);
+            RegisterResponse responseData = doHandle(registerData);
             AuthorizationResponse<RegisterResponse> authorizationResponse = new AuthorizationResponse<>();
             authorizationResponse.setData( responseData);
             return authorizationResponse;

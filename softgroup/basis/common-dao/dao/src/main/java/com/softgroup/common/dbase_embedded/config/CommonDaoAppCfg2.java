@@ -1,4 +1,4 @@
-package com.softgroup.common.dbase.config;
+package com.softgroup.common.dbase_embedded.config;
 
 import liquibase.integration.spring.SpringLiquibase;
 import org.hibernate.dialect.DerbyTenSevenDialect;
@@ -6,7 +6,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
-import org.springframework.jdbc.datasource.SimpleDriverDataSource;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabase;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseBuilder;
+import org.springframework.jdbc.datasource.embedded.EmbeddedDatabaseType;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.orm.jpa.JpaVendorAdapter;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
@@ -16,7 +18,6 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
-import java.sql.Driver;
 
 
 /**
@@ -25,20 +26,19 @@ import java.sql.Driver;
  */
 
 @Configuration
-@PropertySource({ "classpath:dao.properties" })
 @EnableTransactionManagement(proxyTargetClass = true)
 @EnableJpaRepositories(
-        basePackages = "com.softgroup.common.dbase.dao",
-        entityManagerFactoryRef = "entityManagerFactory",
-        transactionManagerRef = "transactionManager"
+        basePackages = "com.softgroup.common.dbase_embedded.dao",
+        entityManagerFactoryRef = "entityManagerFactory_Embedded",
+        transactionManagerRef = "transactionManager_Embedded"
 )
-@ComponentScan(basePackages = {"com.softgroup.common.dbase.service"},
+@ComponentScan(basePackages = {"com.softgroup.common.dbase_embedded.service"},
         excludeFilters = @ComponentScan.Filter(type = FilterType.ANNOTATION, value = {Configuration.class})
 )
-public class CommonDaoAppCfg {
+public class CommonDaoAppCfg2 {
 
     private static final String[] ENTITY_PACKAGES = {
-            "com.softgroup.common.dbase.model"
+            "com.softgroup.common.dbase_embedded.model"
     };
     @Autowired
     Environment env;
@@ -46,36 +46,32 @@ public class CommonDaoAppCfg {
 
     @Bean
     @Primary
-    public LocalContainerEntityManagerFactoryBean entityManagerFactory() throws ClassNotFoundException{
+    public LocalContainerEntityManagerFactoryBean entityManagerFactory_Embedded() {
         LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
-        entityManagerFactoryBean.setDataSource(dataSource());
-        entityManagerFactoryBean.setJpaVendorAdapter(jpaVendorAdapter());
+        entityManagerFactoryBean.setDataSource(dataSource_Embedded());
+        entityManagerFactoryBean.setJpaVendorAdapter(jpaVendorAdapter_Embedded());
         entityManagerFactoryBean.setPackagesToScan(ENTITY_PACKAGES);
         return entityManagerFactoryBean;
     }
 
     @Bean
     @Primary
-    public DataSource dataSource() throws ClassNotFoundException{
-        SimpleDriverDataSource dataSource = new SimpleDriverDataSource();
-//        dataSource.setDriverClass(ClientDriver.class);
-        dataSource.setDriverClass(((Class<Driver>) Class.forName(env.getProperty("db0.driver"))));
-        dataSource.setUrl(env.getProperty("db0.url"));
-        dataSource.setUsername(env.getProperty("db0.username"));
-        dataSource.setPassword(env.getProperty("db0.password"));
-
-        return dataSource;
+    public DataSource dataSource_Embedded(){
+        EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
+        EmbeddedDatabase embeddedDatabase = builder
+                .setType(EmbeddedDatabaseType.DERBY)
+                .build();
+        return embeddedDatabase;
     }
 
     @Bean
     @Primary
-    public PlatformTransactionManager transactionManager() throws ClassNotFoundException{
+    public PlatformTransactionManager transactionManager_Embedded(){
         JpaTransactionManager transactionManager = new JpaTransactionManager();
-        transactionManager.setEntityManagerFactory( entityManagerFactory().getObject());
-
+        transactionManager.setEntityManagerFactory(entityManagerFactory_Embedded().getObject());
         return transactionManager;
     }
-    private JpaVendorAdapter jpaVendorAdapter(){
+    private JpaVendorAdapter jpaVendorAdapter_Embedded(){
         HibernateJpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
         jpaVendorAdapter.setDatabase(Database.DERBY);
         jpaVendorAdapter.setShowSql(true);
@@ -85,10 +81,10 @@ public class CommonDaoAppCfg {
     }
 
     @Bean
-    public SpringLiquibase liquibase() throws ClassNotFoundException{
+    public SpringLiquibase liquibase_Embedded() throws ClassNotFoundException{
         SpringLiquibase liquibase = new SpringLiquibase();
-        liquibase.setChangeLog("classpath:liquiBase.xml");
-        liquibase.setDataSource(dataSource());
+        liquibase.setChangeLog("classpath:liquiBase_embedded.xml");
+        liquibase.setDataSource(dataSource_Embedded());
         return liquibase;
     }
 
