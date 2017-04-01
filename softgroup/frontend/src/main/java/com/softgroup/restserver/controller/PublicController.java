@@ -1,12 +1,10 @@
 package com.softgroup.restserver.controller;
 
-import com.softgroup.authorization.api.message.RegisterResponse;
 import com.softgroup.common.protocol.Request;
 import com.softgroup.common.protocol.Response;
 import com.softgroup.firstrouter.api.RequestRouter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -19,8 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping(
-        value = "/"
-        ,headers = {"command=register"}
+        value = "/register"
         )
 public class PublicController {
 
@@ -37,20 +34,13 @@ public class PublicController {
     public ResponseEntity<?> registration(
             @RequestBody Request<?> request
             ){
-        String strCommand = request.getHeader().getCommand();
+
+        String strType = request.getHeader().getType();
+        if (!"authorization".equals(strType)){
+            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
+        }
 
         Response<?> response = requestRouter.handle(request);
-        RegisterResponse registerResponse = (RegisterResponse) response.retData(response);
-
-        HttpHeaders headers = new HttpHeaders();
-        headers.add("command","register");
-        headers.add("xToken",registerResponse.getAuthCode());
-
-        ResponseEntity<?> responseEntity  = new ResponseEntity<>(
-                registerResponse
-                ,headers
-                , HttpStatus.OK
-        );
-        return responseEntity;
+        return new ResponseEntity<>(response,HttpStatus.OK);
     }
 }

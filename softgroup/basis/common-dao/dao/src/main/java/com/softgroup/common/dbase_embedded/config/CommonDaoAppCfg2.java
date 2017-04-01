@@ -45,7 +45,6 @@ public class CommonDaoAppCfg2 {
 
 
     @Bean
-    @Primary
     public LocalContainerEntityManagerFactoryBean entityManagerFactory_Embedded() {
         LocalContainerEntityManagerFactoryBean entityManagerFactoryBean = new LocalContainerEntityManagerFactoryBean();
         entityManagerFactoryBean.setDataSource(dataSource_Embedded());
@@ -55,7 +54,6 @@ public class CommonDaoAppCfg2 {
     }
 
     @Bean
-    @Primary
     public DataSource dataSource_Embedded(){
         EmbeddedDatabaseBuilder builder = new EmbeddedDatabaseBuilder();
         EmbeddedDatabase embeddedDatabase = builder
@@ -65,7 +63,6 @@ public class CommonDaoAppCfg2 {
     }
 
     @Bean
-    @Primary
     public PlatformTransactionManager transactionManager_Embedded(){
         JpaTransactionManager transactionManager = new JpaTransactionManager();
         transactionManager.setEntityManagerFactory(entityManagerFactory_Embedded().getObject());
@@ -75,7 +72,7 @@ public class CommonDaoAppCfg2 {
         HibernateJpaVendorAdapter jpaVendorAdapter = new HibernateJpaVendorAdapter();
         jpaVendorAdapter.setDatabase(Database.DERBY);
         jpaVendorAdapter.setShowSql(true);
-        jpaVendorAdapter.setGenerateDdl(true);
+        jpaVendorAdapter.setGenerateDdl(false);
         jpaVendorAdapter.setDatabasePlatform(DerbyTenSevenDialect.class.getCanonicalName());
         return jpaVendorAdapter;
     }

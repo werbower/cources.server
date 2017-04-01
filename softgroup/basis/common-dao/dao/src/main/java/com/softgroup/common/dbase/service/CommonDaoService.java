@@ -16,8 +16,6 @@ public class CommonDaoService<W extends PagingAndSortingRepository<T,S>, T,S ext
     public T save(T s) {
         return rep.save(s);
     }
-
-
     public T findOne(S s) {
         return rep.findOne(s);
     }

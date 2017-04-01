@@ -3,6 +3,7 @@ package com.softgroup.restserver.config;
 import com.softgroup.authorization.api.AuthorizationConfig;
 import com.softgroup.common.datamapper.configuration.DataMapperAppCfg;
 import com.softgroup.common.dbase.config.CommonDaoAppCfg;
+import com.softgroup.common.dbase_embedded.config.CommonDaoAppCfg2;
 import com.softgroup.common.router.api.RouterConfig;
 import com.softgroup.firstrouter.api.FirstRouterConfig;
 import com.softgroup.token.TokenConfig;
@@ -25,6 +26,7 @@ import java.util.List;
         , AuthorizationConfig.class
         , FirstRouterConfig.class
         , CommonDaoAppCfg.class
+        , CommonDaoAppCfg2.class
         , TokenConfig.class
         , DataMapperAppCfg.class
 

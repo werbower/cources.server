@@ -16,7 +16,7 @@ import java.io.IOException;
  * Created by user on 22.03.2017.
  */
 @Component
-public class MyFilter extends GenericFilterBean {
+public class MyFilterOfJWT extends GenericFilterBean {
     @Autowired
     RegisterUser registerUser;
 
@@ -24,7 +24,7 @@ public class MyFilter extends GenericFilterBean {
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
-        if (httpServletRequest.getHeader("command").equals("register")){
+        if ("register".equals(httpServletRequest.getHeader("command"))){
             SecurityContextHolder.getContext().setAuthentication(registerUser);}
         else if (httpServletRequest.getHeader("xToken")!=null){
 

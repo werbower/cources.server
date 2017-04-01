@@ -14,12 +14,17 @@
         <dependency>
             <groupId>org.springframework.data</groupId>
             <artifactId>spring-data-jpa</artifactId>
-
         </dependency>
+
         <dependency>
             <groupId>org.apache.derby</groupId>
             <artifactId>derbyclient</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.apache.derby</groupId>
+            <artifactId>derby</artifactId>
+        </dependency>
+
         <dependency>
             <groupId>org.hibernate</groupId>
             <artifactId>hibernate-core</artifactId>
@@ -74,14 +79,27 @@
                         <directory>src/main/resources/release</directory>
                     </resource>
                     <resource>
-                        <directory>src/main/resources/release/liquibase</directory>
+                        <directory>src/main/resources/common/liquibase</directory>
                     </resource>
                     <resource>
-                        <directory>src/main/resources/release/liquibase_embedded</directory>
+                        <directory>src/main/resources/common/liquibase_embedded</directory>
                     </resource>
                 </resources>
             </build>
         </profile>
     </profiles>
+    <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources/common</directory>
+            </resource>
+            <resource>
+                <directory>src/main/resources/common/liquibase</directory>
+            </resource>
+            <resource>
+                <directory>src/main/resources/common/liquibase_embedded</directory>
+            </resource>
+        </resources>
+    </build>
 
 </project>

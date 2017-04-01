@@ -15,19 +15,23 @@ public class RegisterEntity implements Serializable {
     @Column(name = "id")
     private String id;
     //
-    @Column(name = "request_uuid")
-    private String requestUuid;
+    @Column(name = "device_id")
+    private String deviceId;
     //
-    @Column(name = "timeout")
-    private Long timeout;
+    @Column(name = "time_created")
+    private Long timeCreated;
     //
-    @Column(name = "auth_code")
-    private String authCode;
+    @Column(name = "time_closed")
+    private Long timeClosed;
     //
     @Column(name = "phone_number")
     private String phoneNumber;
+    //
+    @Column(name = "auth_code")
+    private String authCode;
 
     //<editor-fold desc="getters & setters">
+
     public static long getSerialVersionUID() {
         return serialVersionUID;
     }
@@ -40,28 +44,28 @@ public class RegisterEntity implements Serializable {
         this.id = id;
     }
 
-    public String getRequestUuid() {
-        return requestUuid;
+    public String getDeviceId() {
+        return deviceId;
     }
 
-    public void setRequestUuid(String requestUuid) {
-        this.requestUuid = requestUuid;
+    public void setDeviceId(String deviceId) {
+        this.deviceId = deviceId;
     }
 
-    public Long getTimeout() {
-        return timeout;
+    public Long getTimeCreated() {
+        return timeCreated;
     }
 
-    public void setTimeout(Long timeout) {
-        this.timeout = timeout;
+    public void setTimeCreated(Long timeCreated) {
+        this.timeCreated = timeCreated;
     }
 
-    public String getAuthCode() {
-        return authCode;
+    public Long getTimeClosed() {
+        return timeClosed;
     }
 
-    public void setAuthCode(String authCode) {
-        this.authCode = authCode;
+    public void setTimeClosed(Long timeClosed) {
+        this.timeClosed = timeClosed;
     }
 
     public String getPhoneNumber() {
@@ -70,6 +74,14 @@ public class RegisterEntity implements Serializable {
 
     public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public String getAuthCode() {
+        return authCode;
+    }
+
+    public void setAuthCode(String authCode) {
+        this.authCode = authCode;
     }
     //</editor-fold>
 }

@@ -2,6 +2,7 @@ package com.softgroup.common.router.api.implementation;
 
 import com.softgroup.common.protocol.Request;
 import com.softgroup.common.protocol.Response;
+import com.softgroup.common.protocol.ResponseStatus;
 import com.softgroup.common.router.api.interfaces.Handler;
 
 import java.util.Map;
@@ -23,7 +24,18 @@ public abstract class AbstractRouter implements Handler {
 
     @Override
     public Response<?> handle(Request<?> msg) {
-        Handler handler = getMap().get(getRouteKey(msg));
-        return handler.handle(msg);
+        String routeKey = getRouteKey(msg);
+        Handler handler = getMap().get(routeKey);
+        if (handler==null){
+            Response<?> response = new Response<>();
+            ResponseStatus responseStatus = new ResponseStatus();
+            responseStatus.setCode(400);
+            responseStatus.setMessage("bad request type/command "+routeKey);
+            response.setStatus(responseStatus);
+            return response;
+        } else {
+            return handler.handle(msg);
+        }
+
     }
 }

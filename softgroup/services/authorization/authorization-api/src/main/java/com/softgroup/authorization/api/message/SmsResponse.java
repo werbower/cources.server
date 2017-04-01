@@ -9,24 +9,20 @@ public class SmsResponse implements ResponseData {
 
     private static final long serialVersionUID = -6923538163764454748L;
 
-    private String authCode;
-    private String registrationRequestUuid;
+    private String deviceToken;
 
     //<editor-fold desc="Getters & Setters">
-    public String getAuthCode() {
-        return authCode;
+
+    public static long getSerialVersionUID() {
+        return serialVersionUID;
     }
 
-    public String getRegistrationRequestUuid() {
-        return registrationRequestUuid;
+    public String getDeviceToken() {
+        return deviceToken;
     }
 
-    public void setauthCode(String authCode) {
-        this.authCode = authCode;
-    }
-
-    public void setRegistrationRequestUuid(String registrationRequestUuid) {
-        this.registrationRequestUuid = registrationRequestUuid;
+    public void setDeviceToken(String deviceToken) {
+        this.deviceToken = deviceToken;
     }
     //</editor-fold>
 }

@@ -36,6 +36,7 @@ public class ProfileService extends CommonDaoService<ProfileRepository,ProfileEn
             System.out.println(" в базе нет элемента с телефоном "+phoneNumber);
             ProfileEntity newEntity = new ProfileEntity();
             newEntity.setId(UUID.randomUUID().toString());
+            newEntity.setName("unknown");
             newEntity.setPhoneNumber(phoneNumber);
             newEntity.setCreateDateTime(new Date(System.currentTimeMillis()).getTime());
             foundEntity = save(newEntity);
