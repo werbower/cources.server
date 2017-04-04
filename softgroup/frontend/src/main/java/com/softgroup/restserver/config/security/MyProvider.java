@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 public class MyProvider implements AuthenticationProvider {
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
-        if (authentication.getName().equals("REGISTER")){
+        if (authentication instanceof ProfileUser){
             return authentication;
         }else
             return null;

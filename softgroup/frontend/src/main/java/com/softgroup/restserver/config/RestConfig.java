@@ -6,6 +6,7 @@ import com.softgroup.common.dbase.config.CommonDaoAppCfg;
 import com.softgroup.common.dbase_embedded.config.CommonDaoAppCfg2;
 import com.softgroup.common.router.api.RouterConfig;
 import com.softgroup.firstrouter.api.FirstRouterConfig;
+import com.softgroup.profileservice.ProfileServiceConfig;
 import com.softgroup.token.TokenConfig;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -24,6 +25,7 @@ import java.util.List;
 @Configuration
 @Import({RouterConfig.class
         , AuthorizationConfig.class
+        , ProfileServiceConfig.class
         , FirstRouterConfig.class
         , CommonDaoAppCfg.class
         , CommonDaoAppCfg2.class

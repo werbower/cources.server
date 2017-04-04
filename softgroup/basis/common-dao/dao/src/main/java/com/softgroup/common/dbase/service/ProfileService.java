@@ -15,8 +15,7 @@ import java.util.UUID;
  */
 @Service
 @Transactional(value = "transactionManager")
-public class ProfileService extends CommonDaoService<ProfileRepository,ProfileEntity,String>
-        {
+public class ProfileService extends CommonDaoService<ProfileRepository,ProfileEntity,String> {
 
     public List<ProfileEntity> findByName(String s) {
         return rep.findByName(s);
@@ -42,6 +41,10 @@ public class ProfileService extends CommonDaoService<ProfileRepository,ProfileEn
             foundEntity = save(newEntity);
         }
         return foundEntity;
+    }
+    //
+    public ProfileEntity findById(String id){
+        return rep.findOne(id);
     }
 
 
