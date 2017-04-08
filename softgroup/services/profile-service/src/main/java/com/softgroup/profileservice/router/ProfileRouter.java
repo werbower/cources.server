@@ -1,7 +1,7 @@
 package com.softgroup.profileservice.router;
 
 import com.softgroup.common.router.api.implementation.HandlerRouter;
-import com.softgroup.common.router.api.interfaces.ProfileHandler;
+import com.softgroup.profileservice.handler.ProfileHandler;
 import com.softgroup.common.router.api.interfaces.RouterHandler;
 import org.springframework.stereotype.Component;
 

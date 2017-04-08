@@ -1,10 +1,11 @@
 package com.softgroup.profileservice.handler;
 
-import com.softgroup.common.dbase.service.ProfileService;
-import com.softgroup.common.protocol.Request;
+import com.softgroup.common.dbase.DTO.ProfileDTO;
+import com.softgroup.common.dbase.service.ProfileServiceDTO;
 import com.softgroup.common.protocol.Response;
-import com.softgroup.common.protocol.ResponseStatus;
-import com.softgroup.common.router.api.interfaces.ProfileHandler;
+import com.softgroup.common.protocol.ResponseStatusEnum;
+import com.softgroup.common.router.api.implementation.AbstractHandler;
+import com.softgroup.profileservice.message.GetMyProfileRequest;
 import com.softgroup.profileservice.message.GetMyProfileResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -14,40 +15,30 @@ import org.springframework.stereotype.Component;
  * Created by user on 28.02.2017.
  */
 @Component
-public class GetMyProfileHandler implements ProfileHandler {
+public class GetMyProfileHandler extends AbstractHandler<GetMyProfileResponse,GetMyProfileRequest> implements ProfileHandler {
     public String getName() {
         return "getMyProfile";
     }
 
     @Autowired
-    ProfileService profileService;
+    ProfileServiceDTO profileService;
 
-    public Response<GetMyProfileResponse> doHandle(String profileId) {
-        System.out.println(" Обрабатываю GetMyProfileRequest");
-        Response<GetMyProfileResponse> response = new Response<>();
+    public GetMyProfileHandler() {
+        super(GetMyProfileRequest.class);
+    }
 
-        ResponseStatus responseStatus = new ResponseStatus();
-        responseStatus.setCode(200);
-        responseStatus.setMessage("ok");
-        response.setStatus(responseStatus);
-        //
-        GetMyProfileResponse responseData= new GetMyProfileResponse();
-        responseData.setProfileEntity(profileService.findById(profileId));
-        response.setData(responseData);
-
+    @Override
+    public Response<?> doHandle(Response<GetMyProfileResponse> response, GetMyProfileRequest requestData) {
+        //ProfileDTO profileDTO = profileService.findOne(requestData.getProfileId());
+        ProfileDTO profileDTO = profileService.findOne((String)SecurityContextHolder.getContext().getAuthentication().getPrincipal());
+        if (profileDTO==null){
+            response.setStatus(ResponseStatusEnum.NOT_FOUND);
+        }else {
+            GetMyProfileResponse responseData = new GetMyProfileResponse();
+            responseData.setProfile(profileDTO);
+            response.setData(responseData);
+        }
         return response;
     }
 
-    public Response<?> handle(Request<?> msg) {
-        String profileId = (String) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-        if (profileId!=null){
-
-            Response<GetMyProfileResponse> response = doHandle(profileId);
-            response.setHeader(msg.getHeader());
-            return response;
-        }else {
-            return null;
-        }
-    }
 }

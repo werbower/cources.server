@@ -1,7 +1,6 @@
 package com.softgroup.restserver.controller;
 
 import com.softgroup.common.protocol.Request;
-import com.softgroup.common.protocol.Response;
 import com.softgroup.firstrouter.api.RequestRouter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -19,10 +18,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(
         value = "/messager"
         )
-public class ProfileController {
+public class PrivateController {
 
     @Autowired
-    RequestRouter requestRouter;
+    RequestRouter firstRouter;
     @Autowired
     Environment environment;
 
@@ -31,16 +30,7 @@ public class ProfileController {
             consumes = MediaType.APPLICATION_JSON_VALUE
             ,produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public ResponseEntity<?> registration(
-            @RequestBody Request<?> request
-            ){
-
-        String strType = request.getHeader().getType();
-        if (!"profile".equals(strType)){
-            return new ResponseEntity<>(HttpStatus.FORBIDDEN);
-        }
-
-        Response<?> response = requestRouter.handle(request);
-        return new ResponseEntity<>(response,HttpStatus.OK);
+    public ResponseEntity<?> registration(@RequestBody Request<?> request ){
+        return new ResponseEntity<>(firstRouter.handle(request),HttpStatus.OK);
     }
 }

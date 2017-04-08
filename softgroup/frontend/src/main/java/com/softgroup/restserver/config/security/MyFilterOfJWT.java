@@ -1,7 +1,7 @@
 package com.softgroup.restserver.config.security;
 
-import com.softgroup.common.dbase.model.ProfileEntity;
 import com.softgroup.token.JwtApi;
+import com.softgroup.token.UserProfile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -30,7 +30,7 @@ public class MyFilterOfJWT extends GenericFilterBean {
         String xToken = httpServletRequest.getHeader("xToken");
 
          if (xToken!=null){
-            ProfileEntity profileEntity = jwtService.profileFromToken(xToken);
+            UserProfile profileEntity = jwtService.profileFromToken(xToken);
             if (profileEntity!=null){
                 SecurityContextHolder.getContext().setAuthentication(new ProfileUser(profileEntity));
             }

@@ -43,9 +43,6 @@ public class ProfileService extends CommonDaoService<ProfileRepository,ProfileEn
         return foundEntity;
     }
     //
-    public ProfileEntity findById(String id){
-        return rep.findOne(id);
-    }
 
 
 }

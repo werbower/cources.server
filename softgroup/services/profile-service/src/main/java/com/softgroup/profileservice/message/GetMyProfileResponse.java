@@ -1,6 +1,6 @@
 package com.softgroup.profileservice.message;
 
-import com.softgroup.common.dbase.model.ProfileEntity;
+import com.softgroup.common.dbase.DTO.ProfileDTO;
 import com.softgroup.common.protocol.ResponseData;
 
 /**
@@ -9,19 +9,19 @@ import com.softgroup.common.protocol.ResponseData;
  */
 public class GetMyProfileResponse implements ResponseData {
 	private static final long serialVersionUID = -9050275052081396657L;
-	private ProfileEntity profileEntity;
+	private ProfileDTO profile;
 
 	//<editor-fold desc="getters&setters">
 	public static long getSerialVersionUID() {
 		return serialVersionUID;
 	}
 
-	public ProfileEntity getProfileEntity() {
-		return profileEntity;
+	public ProfileDTO getProfile() {
+		return profile;
 	}
 
-	public void setProfileEntity(ProfileEntity profileEntity) {
-		this.profileEntity = profileEntity;
+	public void setProfile(ProfileDTO profile) {
+		this.profile = profile;
 	}
 	//</editor-fold>
 }

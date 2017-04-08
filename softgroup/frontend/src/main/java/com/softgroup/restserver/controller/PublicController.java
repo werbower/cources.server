@@ -22,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class PublicController {
 
     @Autowired
-    RequestRouter requestRouter;
+    RequestRouter firstRouter;
     @Autowired
     Environment environment;
 
@@ -40,7 +40,7 @@ public class PublicController {
             return new ResponseEntity<>(HttpStatus.FORBIDDEN);
         }
 
-        Response<?> response = requestRouter.handle(request);
+        Response<?> response = firstRouter.handle(request);
         return new ResponseEntity<>(response,HttpStatus.OK);
     }
 }
