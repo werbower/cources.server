@@ -21,18 +21,13 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig extends WebSecurityConfigurerAdapter{
     @Autowired
     MyFilterOfJWT myFilter;
-    @Autowired
-    MyProvider myProvider;
+
 
     @Override
     public void configure(WebSecurity web) throws Exception {
         web.ignoring().antMatchers("/register");
     }
 
-//    @Override
-//    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-//        auth.authenticationProvider(myProvider);
-//    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
