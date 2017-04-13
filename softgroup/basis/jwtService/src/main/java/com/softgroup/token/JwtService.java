@@ -40,12 +40,12 @@ public class JwtService implements JwtApi{
         return jwtBuilder.compact();
     }
 
-    public UserProfile profileFromToken(String token){
+    public TokenProfile profileFromToken(String token){
         if (token==null)
             return null;
         //
         Claims claims;
-        UserProfile resEntity = null;
+        TokenProfile resEntity = null;
         JwtParser jwtParser = Jwts.parser().setSigningKey(secretKey);
         try {
             claims = jwtParser.parseClaimsJws(token).getBody();
@@ -59,7 +59,7 @@ public class JwtService implements JwtApi{
         if (locId==null || locPhoneNumber==null || locName==null)
             return null;
 
-        resEntity = new UserProfile();
+        resEntity = new TokenProfile();
         resEntity.setId(locId);
         resEntity.setPhoneNumber(locPhoneNumber);
         resEntity.setName(locName);

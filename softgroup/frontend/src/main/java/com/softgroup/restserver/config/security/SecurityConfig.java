@@ -1,10 +1,8 @@
 package com.softgroup.restserver.config.security;
 
-import com.softgroup.token.TokenConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -15,7 +13,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
  * Created by user on 18.03.2017.
  */
 @Configuration
-@Import({ TokenConfig.class})
 @EnableWebSecurity
 @ComponentScan
 public class SecurityConfig extends WebSecurityConfigurerAdapter{

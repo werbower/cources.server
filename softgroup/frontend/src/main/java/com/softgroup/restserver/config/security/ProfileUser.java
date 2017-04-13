@@ -1,6 +1,6 @@
 package com.softgroup.restserver.config.security;
 
-import com.softgroup.token.UserProfile;
+import com.softgroup.token.TokenProfile;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -15,11 +15,11 @@ import java.util.List;
  */
 @Component
 public class ProfileUser implements Authentication {
-    private UserProfile profile;
+    private TokenProfile profile;
 
     public ProfileUser() {
     }
-    public ProfileUser(UserProfile profile) {
+    public ProfileUser(TokenProfile profile) {
         this.profile = profile;
     }
 
@@ -29,7 +29,7 @@ public class ProfileUser implements Authentication {
     }
 
     @Override
-    public UserProfile getDetails() {
+    public TokenProfile getDetails() {
         return profile;
     }
 

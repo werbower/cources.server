@@ -3,7 +3,7 @@ package com.softgroup.token;
 /**
  * Created by user on 08.04.2017.
  */
-public class UserProfile {
+public class TokenProfile {
     private String id;
     private String phoneNumber;
     private String name;

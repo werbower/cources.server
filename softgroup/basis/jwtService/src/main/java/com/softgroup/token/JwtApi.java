@@ -9,7 +9,7 @@ import com.softgroup.common.dbase_embedded.model.RegisterEntity;
 public interface JwtApi {
     String tokenFromProfile(ProfileEntity profileEntity,Long timeout);
     String tokenFromProfile(ProfileEntity profileEntity);
-    UserProfile profileFromToken(String token);
+    TokenProfile profileFromToken(String token);
 
     String tokenFromRegister(RegisterEntity registerEntity,Long timeout);
     String tokenFromRegister(RegisterEntity registerEntity);
