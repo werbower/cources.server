@@ -2,7 +2,6 @@ package com.softgroup.common.dbase.config;
 
 import liquibase.integration.spring.SpringLiquibase;
 import org.hibernate.dialect.DerbyTenSevenDialect;
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
@@ -92,10 +91,7 @@ public class CommonDaoAppCfg {
         liquibase.setDataSource(dataSource());
         return liquibase;
     }
-    @Bean
-    public ModelMapper modelMapper(){
-        return new ModelMapper();
-    }
+
 
 
 }
