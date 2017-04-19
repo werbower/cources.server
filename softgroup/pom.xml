@@ -74,6 +74,11 @@
 				<artifactId>jwtService</artifactId>
 				<version>${project.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>com.softgroup</groupId>
+				<artifactId>profile-service</artifactId>
+				<version>${project.version}</version>
+			</dependency>
 
 
 
@@ -141,6 +146,11 @@
 				<groupId>org.springframework.security</groupId>
 				<artifactId>spring-security-config</artifactId>
 				<version>${spring.security}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.modelmapper</groupId>
+				<artifactId>modelmapper</artifactId>
+				<version>0.7.5</version>
 			</dependency>
 
 

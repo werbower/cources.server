@@ -60,6 +60,7 @@ public class RegisterHandler implements AuthorizationHandler {
         String strTimeClosed = registerEntity.getTimeClosed().toString();
         String strAuthCode = strTimeClosed.substring(strTimeClosed.length()-5);
         registerEntity.setAuthCode(strAuthCode);
+        System.out.println("установлен AuthCode "+strAuthCode);
         //
         registerService.deleteExpiredQuery(curTime);
         registerEntity = registerService.findOrCreateRegister(registerEntity);

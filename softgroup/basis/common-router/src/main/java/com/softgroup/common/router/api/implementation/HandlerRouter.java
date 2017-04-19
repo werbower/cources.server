@@ -1,7 +1,6 @@
 package com.softgroup.common.router.api.implementation;
 
 import com.softgroup.common.protocol.Request;
-import com.softgroup.common.router.api.interfaces.AuthorizationHandler;
 import com.softgroup.common.router.api.interfaces.Handler;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -13,9 +12,9 @@ import java.util.Map;
 /**
  * Created by user on 28.02.2017.
  */
-public abstract class HandlerRouter extends AbstractRouter {
+public abstract class HandlerRouter<T extends Handler> extends AbstractRouter {
     @Autowired
-    private List<AuthorizationHandler> listHandlers;
+    private List<T> listHandlers;
 
     @PostConstruct
     private void populateMap(){

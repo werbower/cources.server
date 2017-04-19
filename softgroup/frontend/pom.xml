@@ -39,6 +39,12 @@
 			<groupId>com.softgroup</groupId>
 			<artifactId>jwtService</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>com.softgroup</groupId>
+			<artifactId>profile-service</artifactId>
+		</dependency>
+
+
 
 		<dependency>
 			<groupId>org.springframework</groupId>
@@ -68,8 +74,14 @@
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-config</artifactId>
 		</dependency>
+        <dependency>
+            <groupId>com.softgroup</groupId>
+            <artifactId>common-modelmapper</artifactId>
+            <version>0.0.1</version>
+        </dependency>
 
-	</dependencies>
+
+    </dependencies>
 
 	<build>
 		<plugins>

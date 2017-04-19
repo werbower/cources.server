@@ -1,5 +1,7 @@
 package com.softgroup.restserver.config.security;
 
+import com.softgroup.token.JwtApi;
+import com.softgroup.token.TokenProfile;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Component;
@@ -18,17 +20,20 @@ import java.io.IOException;
 @Component
 public class MyFilterOfJWT extends GenericFilterBean {
     @Autowired
-    RegisterUser registerUser;
+    JwtApi jwtService;
+
 
 
     @Override
     public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
         HttpServletRequest httpServletRequest = (HttpServletRequest) request;
-        if ("register".equals(httpServletRequest.getHeader("command"))){
-            SecurityContextHolder.getContext().setAuthentication(registerUser);}
-        else if (httpServletRequest.getHeader("xToken")!=null){
+        String xToken = httpServletRequest.getHeader("xToken");
 
-
+         if (xToken!=null){
+            TokenProfile profile = jwtService.profileFromToken(xToken);
+            if (profile!=null){
+                SecurityContextHolder.getContext().setAuthentication(new ProfileUser(profile));
+            }
         }
 
         chain.doFilter(request,response);
